@@ -32,7 +32,7 @@ def nombre(nom):
 
 @app.route("/numero/<int:n1>")
 def numero(n1):
-    return "<h1>EL calor es {}</h1>".format(n1)
+    return "<h1>EL valor es {}</h1>".format(n1)
 
 @app.route("/user/<string:nom>/<int:id>")
 def nomYid(nom,id):
@@ -68,6 +68,8 @@ def res():
     if request.method == "POST":
         num1 = request.form.get("n1")
         num2 = request.form.get("n2")
+        
+        
         return "<h1> El resultado es: {}</h1>".format(str(int(num1)*int(num2)))
 
 if __name__ == "__main__":
