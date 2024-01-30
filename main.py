@@ -1,4 +1,5 @@
 from flask import Flask,request,render_template
+import forms
 
 app = Flask(__name__)
 
@@ -6,9 +7,22 @@ app = Flask(__name__)
 def INDEX():
     return render_template("index.html")
 
-@app.route("/alumnos")
-def INDEX2():
-    return render_template("alumnos.html")
+@app.route("/alumnos",methods=("GET","POST"))
+def alumnos():
+    alum_forms=forms.UserForm(request.form)
+    nom = ''
+    apa = ''
+    email = ''
+    
+    if request.method=='POST':
+      nom = alum_forms.nombre.data
+      apa = alum_forms.apaterno.data
+      email = alum_forms.email.data
+
+      print("Nombre: {}".format(nom))
+      print("Apellido: {}".format(apa))
+      print("Correo: {}".format(email))
+    return render_template("alumnos.html", form=alum_forms,nom=nom,apa=apa,email=email)
 
 @app.route("/maestros")
 def INDEX3():

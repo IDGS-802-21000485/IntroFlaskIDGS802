@@ -1,4 +1,20 @@
-{% extends 'layout.html' %}
+{% extends 'layout2.html' %}
 {% block content %}
-<h1>Saludos desde alumnos</h1>
-{% endblock %}
+{% import "_macros.html" as macros %}
+
+    <h1>Alumnos</h1>
+    <form action="" method="post">
+       <!--  {{macros.datos("nombre","NOMBRE")}}
+        {{macros.datos("edad","EDAD","number")}} -->
+
+        {{macros.input_form(form.nombre,class="form-control")}}
+        {{macros.input_form(form.apaterno,class="form-control")}}
+        {{macros.input_form(form.email,class="form-control")}}
+        <input type="submit" name="btn1">
+    </form>
+
+    <h2>Nombre: {{nom}}</h2>
+    <h2>Apellido: {{apa}}</h2>
+    <h2>Email: {{email}}</h2>
+
+    {% endblock %}

@@ -1,10 +1,11 @@
-from wtforms import form
-from wtforms import StringField, TextAreaField, TextField, SelectField, RadioField
-from wtforms import EmailField
+from wtforms import Form
+from wtforms import StringField, TextAreaField, SelectField, RadioField, EmailField
 
-class UserFind (form):
-    nombre = StringField("nombre")
-    email = EmailField("correo")
-    apeterno = TextField("apaterno")
-    materno = SelectField(choices=[('Español','esp'),('Matematica','mat'),('Ingles','ing')])
-    radios = RadioField('Curso', choices=[('1','1'),('2','2'),('3','3')])
+class UserForm(Form):
+    nombreSelc = SelectField("Nombre")
+    nombre = StringField("Nombre")
+    email = EmailField("Correo")
+    apaterno = StringField("Apaterno")
+    materias = SelectField(choices=[("Espanol", "Esp",), ("Mat", "matematicas"), ('Ingles', 'ING')])
+
+    radios = RadioField('Curso', choices=[('1', '1'), ('2','2'), ('3','3')])

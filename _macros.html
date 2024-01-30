@@ -1,0 +1,10 @@
+{% macro datos (name, placeholder, type="text")%}
+    <p>
+        <input placeholder="{{name}}" name="{{placeholder}}" type="{{type}}">
+    </p>
+{% endmacro %}
+
+{% macro input_form(field) %}
+    <td>{{field.label}}</td>
+    <dd>{{field(**kwargs)|safe}}</dd>
+{% endmacro %}
