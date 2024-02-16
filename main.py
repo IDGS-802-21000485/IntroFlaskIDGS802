@@ -14,7 +14,7 @@ def alumnos():
     apa = ''
     email = ''
     
-    if request.method=='POST':
+    if request.method=='POST' and alum_forms.validate():
       nom = alum_forms.nombre.data
       apa = alum_forms.apaterno.data
       email = alum_forms.email.data
