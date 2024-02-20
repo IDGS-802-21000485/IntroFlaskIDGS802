@@ -1,7 +1,20 @@
-from flask import Flask,request,render_template
+from flask import Flask,request,render_template, Response
 import forms
+from flask_wtf.csrf import CSRFProtect
+from flask import flash
+from flask import g
 
 app = Flask(__name__)
+app.secret_key = "esta es la clave secreta"
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"),404
+
+@app.before_request
+def before_request():
+    g.prueba = 'hola'
+    print("despues de la ruta 1")
 
 @app.route("/")
 def INDEX():
@@ -9,6 +22,9 @@ def INDEX():
 
 @app.route("/alumnos",methods=("GET","POST"))
 def alumnos():
+    print('despues de la ruta 2')
+    valor = g.prueba
+    print('el dato es:{}'.format(valor))
     alum_forms=forms.UserForm(request.form)
     nom = ''
     apa = ''
@@ -18,11 +34,18 @@ def alumnos():
       nom = alum_forms.nombre.data
       apa = alum_forms.apaterno.data
       email = alum_forms.email.data
-
+      
+      messages = 'Bienvenido {}'.format(nom)
+      flash(messages)
+      
       print("Nombre: {}".format(nom))
       print("Apellido: {}".format(apa))
       print("Correo: {}".format(email))
     return render_template("alumnos.html", form=alum_forms,nom=nom,apa=apa,email=email)
+
+@app.after_request
+def after_request(response):
+    print("despues de la ruta 3")
 
 @app.route("/maestros")
 def INDEX3():
